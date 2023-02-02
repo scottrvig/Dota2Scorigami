@@ -8,15 +8,16 @@ router.get('/', (req, res) => {
     res.render('index', { title: 'Express' });
 });
 
-router.get('/getScorigamiMatrix', asyncHandler(async (req, res) => {
+router.get('/getScorigamiMatrix', (req, res) => {
     // TODO: "Query parameters" for "include The International", Majors, etc
 
-    var matrix = await db.getScorigamiMatrix();
+    // TODO: Fix async
+    var matrix = db.getScorigamiMatrix();
     res.send(matrix);
-}));
+});
 
-router.get('/getMatchesWithScore/:radiantScore/:direScore', async (req, res) => {
-    var result = await db.getMatchesWithScore(radiantScore, direScore);
+router.get('/getMatchesWithScore/:radiantScore/:direScore', (req, res) => {
+    var result = db.getMatchesWithScore(radiantScore, direScore);
     res.send(result);
 });
 
