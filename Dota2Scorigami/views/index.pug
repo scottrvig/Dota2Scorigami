@@ -8,5 +8,18 @@ block content
         p col 2
     div(class='col')
         p col 3
-  h1= title
-  p Welcome to Scott
+
+  script.
+      $(document).ready(function(){
+        $.ajax({
+              url: "/getScorigamiMatrix",
+              type: "get",
+              contentType: "application/json",
+              success: function(result) {
+                console.log(result[24][23]);
+              },
+              error: function(result) {
+                console.log("Error when trying to load Scorigami matrix.");
+              }
+        });
+      });
