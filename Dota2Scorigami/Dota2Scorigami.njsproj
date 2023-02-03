@@ -33,9 +33,6 @@
     <Content Include="config.js">
       <SubType>Code</SubType>
     </Content>
-    <Content Include="routes\users.js">
-      <SubType>Code</SubType>
-    </Content>
     <Content Include="services\db.js">
       <SubType>Code</SubType>
     </Content>
