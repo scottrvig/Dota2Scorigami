@@ -33,6 +33,7 @@
     <Content Include="config.js">
       <SubType>Code</SubType>
     </Content>
+    <Content Include="public\favicon.ico" />
     <Content Include="services\db.js">
       <SubType>Code</SubType>
     </Content>

@@ -7,7 +7,7 @@ var maxScore = 85;
 
 /* GET home page. */
 router.get('/', (req, res) => {
-    res.render('index', { title: 'Express' });
+    res.render('index', { title: 'Dota 2 Scorigami' });
 });
 
 router.get('/getScorigamiMatrix', async (req, res) => {
