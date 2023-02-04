@@ -1,8 +1,75 @@
 body {
     padding: 50px;
-    font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
 a {
     color: #00B7FF;
+}
+
+.table-container {
+    width: 1800px;
+    margin: auto;
+}
+
+.col-value {
+    min-width: 8px;
+    width: 8px;
+    height: 8px;
+    line-height: 8px;
+    padding: 0;
+    text-align: center;
+    font-size: 9px;
+    cursor: pointer;
+}
+
+.col-header {
+    min-width: 12px;
+    width: 12px;
+    height: 12px;
+    line-height: 12px;
+    padding: 0;
+    text-align: center;
+    font-size: 12px;
+}
+
+table {
+    border-spacing: 0;
+    border-collapse: collapse;
+    overflow: hidden;
+    z-index: 1;
+    width: 100%;
+}
+
+td, th, .row, .col {
+    padding: 10px;
+    position: relative;
+}
+
+td:hover {
+    background-color: red;
+    cursor: pointer;
+}
+
+td:hover::before,
+.row:hover::before {
+    background-color: #ffa;
+    content: '\00a0';
+    height: 100%;
+    left: -5000px;
+    position: absolute;
+    top: 0;
+    width: 10000px;
+    z-index: -1;
+}
+
+td:hover::after,
+.col:hover::after {
+    background-color: #ffa;
+    content: '\00a0';
+    height: 10000px;
+    left: 0;
+    position: absolute;
+    top: -5000px;
+    width: 100%;
+    z-index: -1;
 }

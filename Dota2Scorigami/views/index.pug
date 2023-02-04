@@ -1,22 +1,37 @@
 extends layout
 
 block content
-  div(class='row')
-    div(class='col')
-        p test
-    div(class='col')
-        p col 2
-    div(class='col')
-        p col 3
+  div(class='table-container')
+    - var row = 0;
+    - var col = 0;
+    table(id='scorigami-matrix-table')
+      tbody
+        tr 
+         th
+         while col < maxScore
+           th(class='col-header')= col++
+        while row < maxScore
+          tr(class='table-row')
+            -col = 0;
+            th(class='col-header')= row
+            while col < maxScore
+             td(class='col-value', id='cell_' + row + "_" + col++)
+            -row++
 
   script.
+      var maxScore = '!{maxScore}';
+
       $(document).ready(function(){
         $.ajax({
               url: "/getScorigamiMatrix",
               type: "get",
               contentType: "application/json",
               success: function(result) {
-                console.log(result[24][23]);
+                for (var row = 0; row < maxScore; row++) {
+                    for (var col = 0; col < maxScore; col++) {
+                        $("#cell_" + row + "_" + col).html(result[row][col]);
+                    }
+                }
               },
               error: function(result) {
                 console.log("Error when trying to load Scorigami matrix.");
