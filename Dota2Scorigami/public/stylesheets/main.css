@@ -7,7 +7,7 @@ a {
 }
 
 .table-container {
-    width: 1800px;
+    width: 1600px;
     margin: auto;
 }
 
@@ -19,7 +19,6 @@ a {
     padding: 0;
     text-align: center;
     font-size: 9px;
-    cursor: pointer;
 }
 
 .col-header {
@@ -36,8 +35,11 @@ table {
     border-spacing: 0;
     border-collapse: collapse;
     overflow: hidden;
-    z-index: 1;
     width: 100%;
+}
+
+td {
+    border: 1px solid lightgray;
 }
 
 td, th, .row, .col {
@@ -45,14 +47,8 @@ td, th, .row, .col {
     position: relative;
 }
 
-td:hover {
-    background-color: red;
-    cursor: pointer;
-}
-
-td:hover::before,
-.row:hover::before {
-    background-color: #ffa;
+/*td:hover::before, .row:hover::before {
+    background-color: rgb(255, 255, 170, 0.75);
     content: '\00a0';
     height: 100%;
     left: -5000px;
@@ -62,9 +58,9 @@ td:hover::before,
     z-index: -1;
 }
 
-td:hover::after,
-.col:hover::after {
-    background-color: #ffa;
+
+td:hover::after, .col:hover::after {
+    background-color: rgb(255, 255, 170, 0.75);
     content: '\00a0';
     height: 10000px;
     left: 0;
@@ -72,4 +68,70 @@ td:hover::after,
     top: -5000px;
     width: 100%;
     z-index: -1;
+}*/
+
+.hover.over {
+    background-color: rgba(187, 187, 187, 0.60);
 }
+
+.hover.adjhover, .hover.adjhover {
+    background-color: rgba(187, 187, 187, 0.30) /*#AAAAAA*/;
+}
+
+
+/* Color legend */
+.gradient-1 {
+    background-color: dodgerblue;
+    cursor: pointer;
+}
+
+.gradient-2 {
+    background-color: lightskyblue;
+    cursor: pointer;
+}
+
+.gradient-3 {
+    background-color: lightgreen;
+    cursor: pointer;
+}
+
+.gradient-4 {
+    background-color: yellow;
+    cursor: pointer;
+}
+
+.gradient-5 {
+    background-color: coral;
+    cursor: pointer;
+}
+
+.gradient-6 {
+    background-color: red;
+    cursor: pointer;
+}
+
+/* Blue Gradient
+.gradient-1 {
+    background-color: #75A2BF;
+}
+
+.gradient-2 {
+    background-color: #5E8CAD;
+}
+
+.gradient-3 {
+    background-color: #46769B;
+}
+
+.gradient-4 {
+    background-color: #2F5F8A;
+}
+
+.gradient-5 {
+    background-color: #174978;
+}
+
+.gradient-6 {
+    background-color: #003366;
+}
+*/
