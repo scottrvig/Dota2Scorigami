@@ -12,6 +12,28 @@ table {
     margin: auto;
 }
 
+td.direAxisLabel {
+    font-family: 'Trajan Bold';
+    font-size: 24px;
+    text-align: center;
+    font-weight: bold;
+    color: red;
+}
+
+td.radiantAxisLabel {
+    font-family: 'Trajan Bold';
+    font-size: 24px;
+    text-align: center;
+    font-weight: bold;
+    width: 30px;
+    color: green;
+}
+
+.vertical {
+    white-space: nowrap;
+    writing-mode: sideways-lr;
+}
+
 .value-cell, .header-cell {
     min-width: 15px;
     width: 15px;

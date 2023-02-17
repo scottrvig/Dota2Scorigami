@@ -7,6 +7,11 @@ block content
     - var col = 0;
     table(id='scorigami-matrix-table')
       tbody
+        tr
+          td(class='radiantAxisLabel', id='vAxisLabel', rowspan=maxScore+2)
+            div(class='vertical')= 'Radiant Score'
+          td(class='direAxisLabel', id='hAxisLabel', colspan=maxScore+1)
+            div= 'Dire Score'
         tr 
          th
          while col < maxScore
