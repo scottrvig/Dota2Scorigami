@@ -10,19 +10,24 @@ block content
         tr 
          th
          while col < maxScore
-           th(class='col-header')= col++
+           th(class='header-cell')
+             div(class='header-hover', id='colheader_' + col)= col++
         while row < maxScore
           tr(class='table-row')
             -col = 0;
-            th(class='col-header')= row
+            th(class='header-cell')
+              div(class='header-hover', id='rowheader_' + row)= row
             while col < maxScore
-             td(class='col-value', id='cell_' + row + "_" + col++)
+             td(class='value-cell', id='cell_' + row + "_" + col++)
+                div(class='hover', id='hover_' + row + "_" + (col - 1))
             -row++
 
   script.
       var maxScore = '!{maxScore}';
 
       $(document).ready(function(){
+        addGridHoverEvents();
+
         $.ajax({
               url: "/getScorigamiMatrix",
               type: "get",
@@ -58,7 +63,7 @@ block content
                             $("#cell_" + row + "_" + col).addClass("gradient-6");
                         }
 
-                        $("#cell_" + row + "_" + col).html(result[row][col]);
+                        $("#hover_" + row + "_" + col).html(result[row][col]);
                     }
                 }
               },
