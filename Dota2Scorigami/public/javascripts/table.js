@@ -86,3 +86,49 @@ function mouseOffDelegate(i, j) {
         mouseOffGrid(i, j);
     };
 }
+
+function refreshGrid() {
+    $.ajax({
+        url: "/getScorigamiMatrix",
+        type: "get",
+        contentType: "application/json",
+        success: function (result) {
+            for (var row = 0; row < maxScore; row++) {
+                for (var col = 0; col < maxScore; col++) {
+                    var value = result[row][col];
+                    if (value <= 0) continue;
+
+                    // Set color gradient
+                    if (value == 1) {
+                        $("#cell_" + row + "_" + col).addClass("gradient-1");
+                    }
+
+                    if (value > 1 && value <= 4) {
+                        $("#cell_" + row + "_" + col).addClass("gradient-2");
+                    }
+
+                    if (value > 4 && value <= 8) {
+                        $("#cell_" + row + "_" + col).addClass("gradient-3");
+                    }
+
+                    if (value > 8 && value <= 13) {
+                        $("#cell_" + row + "_" + col).addClass("gradient-4");
+                    }
+
+                    if (value > 13 && value <= 20) {
+                        $("#cell_" + row + "_" + col).addClass("gradient-5");
+                    }
+
+                    if (value > 20) {
+                        $("#cell_" + row + "_" + col).addClass("gradient-6");
+                    }
+
+                    $("#hover_" + row + "_" + col).html(result[row][col]);
+                }
+            }
+        },
+        error: function (result) {
+            console.log("Error when trying to load Scorigami matrix.");
+        }
+    });
+}
