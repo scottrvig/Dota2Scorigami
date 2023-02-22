@@ -34,6 +34,7 @@
       <SubType>Code</SubType>
     </Content>
     <Content Include="public\favicon.ico" />
+    <Content Include="public\images\loading_spinner.gif" />
     <Content Include="public\javascripts\table.js">
       <SubType>Code</SubType>
     </Content>

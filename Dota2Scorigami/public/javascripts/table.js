@@ -118,7 +118,11 @@ function refreshGrid() {
             includeDpc: includeDpc
         },
         contentType: "application/json",
+        beforeSend: function () {
+            $("#loading-spinner").show();
+        },
         success: function (result) {
+            $("#loading-spinner").hide();
             for (var row = 0; row < maxScore; row++) {
                 for (var col = 0; col < maxScore; col++) {
                     var value = result[row][col];
@@ -154,6 +158,7 @@ function refreshGrid() {
             }
         },
         error: function (result) {
+            $("#loading-spinner").hide();
             console.log("Error when trying to load Scorigami matrix.");
         }
     });

@@ -69,6 +69,13 @@ td.radiantAxisLabel {
     color: black;
 }
 
+#loading-spinner {
+    position: absolute;
+    margin-top: 400px;
+    margin-left: 790px;
+    width: 100%;
+}
+
 /* Color legend */
 .gradient-1 {
     background-color: dodgerblue;
