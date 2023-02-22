@@ -37,6 +37,12 @@
     <Content Include="public\javascripts\table.js">
       <SubType>Code</SubType>
     </Content>
+    <Content Include="public\stylesheets\switchslider.css">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="public\stylesheets\table.css">
+      <SubType>Code</SubType>
+    </Content>
     <Content Include="services\db.js">
       <SubType>Code</SubType>
     </Content>
