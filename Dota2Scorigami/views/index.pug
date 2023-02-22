@@ -44,7 +44,7 @@ block content
             th(class='header-cell')
               div(class='header-hover', id='rowheader_' + row)= row
             while col < maxScore
-             td(class='value-cell', id='cell_' + row + "_" + col++)
+             td(class='value-cell', onclick="showScoreDetail(" + row + "," + col + ")", id='cell_' + row + "_" + col++)
                 div(class='hover', id='hover_' + row + "_" + (col - 1))
             -row++
 

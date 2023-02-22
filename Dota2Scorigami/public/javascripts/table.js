@@ -87,6 +87,35 @@ function mouseOffDelegate(i, j) {
     };
 }
 
+function getParams() {
+    var includeInternationals = $("#switch-internationals").prop("checked");
+    var includeMajors = $("#switch-majors").prop("checked");
+    var includeDpc = $("#switch-dpc").prop("checked");
+
+    return {
+        includeInternationals: includeInternationals,
+        includeMajors: includeMajors,
+        includeDpc: includeDpc
+    }
+}
+
+function showScoreDetail(row, col) {
+    $.ajax({
+        url: "/getMatchesWithScore/" + row + "/" + col,
+        type: "get",
+        data: getParams(),
+        contentType: "application/json",
+        success: function (result) {
+            if (result.length == 0) {
+                return;
+            }
+        },
+        error: function (result) {
+            console.log("Error when trying to load Scorigami for cell " + row + ", " + col);
+        }
+    })
+}
+
 function clearGrid() {
     for (var row = 0; row < maxScore; row++) {
         for (var col = 0; col < maxScore; col++) {
@@ -103,20 +132,12 @@ function clearGrid() {
 }
 
 function refreshGrid() {
-    var includeInternationals = $("#switch-internationals").prop("checked");
-    var includeMajors = $("#switch-majors").prop("checked");
-    var includeDpc = $("#switch-dpc").prop("checked");
-
     clearGrid();
 
     $.ajax({
         url: "/getScorigamiMatrix",
         type: "get",
-        data: {
-            includeInternationals: includeInternationals,
-            includeMajors: includeMajors,
-            includeDpc: includeDpc
-        },
+        data: getParams(),
         contentType: "application/json",
         beforeSend: function () {
             $("#loading-spinner").show();
@@ -126,7 +147,11 @@ function refreshGrid() {
             for (var row = 0; row < maxScore; row++) {
                 for (var col = 0; col < maxScore; col++) {
                     var value = result[row][col];
-                    if (value <= 0) continue;
+                    if (value <= 0) {
+                        // Override onclick event then continue
+                        $("#cell_" + row + "_" + col).removeAttr("onclick");
+                        continue;
+                    }
 
                     // Set color gradient
                     if (value == 1) {
