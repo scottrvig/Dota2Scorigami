@@ -88,9 +88,20 @@ function mouseOffDelegate(i, j) {
 }
 
 function refreshGrid() {
+    var includeInternationals = $("#switch-internationals").prop("checked");
+    var includeMajors = $("#switch-majors").prop("checked");
+    var includeDpc1 = $("#switch-dpc1").prop("checked");
+    var includeDpc2 = $("#switch-dpc2").prop("checked");
+
     $.ajax({
         url: "/getScorigamiMatrix",
         type: "get",
+        data: {
+            includeInternationals: includeInternationals,
+            includeMajors: includeMajors,
+            includeDpc1: includeDpc1,
+            includeDpc2: includeDpc2
+        },
         contentType: "application/json",
         success: function (result) {
             for (var row = 0; row < maxScore; row++) {
