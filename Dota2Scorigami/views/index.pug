@@ -12,19 +12,13 @@ block content
       label(class='switch')
         input(type='checkbox', checked="checked", id='switch-majors')
         span(class='slider round')
-      div(class='switch-text') Majors
+      div(class='switch-text') Majors/DACs
 
     div(class='switch-wrapper')
       label(class='switch')
-        input(type='checkbox', checked="checked", id='switch-dpc1')
+        input(type='checkbox', checked="checked", id='switch-dpc')
         span(class='slider round')
-      div(class='switch-text') DPC Div 1
-
-    div(class='switch-wrapper')
-      label(class='switch')
-        input(type='checkbox', id='switch-dpc2')
-        span(class='slider round')
-      div(class='switch-text') DPC Div 2
+      div(class='switch-text') DPCs
 
 
   div(class='table-container')
@@ -56,6 +50,9 @@ block content
       var maxScore = '!{maxScore}';
 
       $(document).ready(function(){
+        $("#switch-internationals").on('click', refreshGrid);
+        $("#switch-majors").on('click', refreshGrid);
+        $("#switch-dpc").on('click', refreshGrid);
         addGridHoverEvents();
         refreshGrid();
       });

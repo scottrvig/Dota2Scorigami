@@ -87,11 +87,27 @@ function mouseOffDelegate(i, j) {
     };
 }
 
+function clearGrid() {
+    for (var row = 0; row < maxScore; row++) {
+        for (var col = 0; col < maxScore; col++) {
+            $("#cell_" + row + "_" + col).removeClass("gradient-1");
+            $("#cell_" + row + "_" + col).removeClass("gradient-2");
+            $("#cell_" + row + "_" + col).removeClass("gradient-3");
+            $("#cell_" + row + "_" + col).removeClass("gradient-4");
+            $("#cell_" + row + "_" + col).removeClass("gradient-5");
+            $("#cell_" + row + "_" + col).removeClass("gradient-6");
+
+            $("#hover_" + row + "_" + col).html("");
+        }
+    }
+}
+
 function refreshGrid() {
     var includeInternationals = $("#switch-internationals").prop("checked");
     var includeMajors = $("#switch-majors").prop("checked");
-    var includeDpc1 = $("#switch-dpc1").prop("checked");
-    var includeDpc2 = $("#switch-dpc2").prop("checked");
+    var includeDpc = $("#switch-dpc").prop("checked");
+
+    clearGrid();
 
     $.ajax({
         url: "/getScorigamiMatrix",
@@ -99,8 +115,7 @@ function refreshGrid() {
         data: {
             includeInternationals: includeInternationals,
             includeMajors: includeMajors,
-            includeDpc1: includeDpc1,
-            includeDpc2: includeDpc2
+            includeDpc: includeDpc
         },
         contentType: "application/json",
         success: function (result) {

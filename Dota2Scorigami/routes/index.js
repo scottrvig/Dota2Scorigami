@@ -11,8 +11,7 @@ router.get('/', (req, res) => {
 });
 
 router.get('/getScorigamiMatrix', async (req, res) => {
-    // TODO: "Query parameters" for "include The International", Majors, etc
-    var query = "SELECT match_id, start_time, dire_score, radiant_score, dire_team_name, radiant_team_name, league_name FROM dbo.Matches";
+    var query = buildMatchQuery(req);
 
     var matrix = Array(maxScore).fill().map(() => Array(maxScore).fill(0));
 
@@ -47,5 +46,49 @@ router.get('/getMatchesWithScore/:radiantScore/:direScore', async (req, res) => 
         res.send(err.message);
     }
 });
+
+function buildMatchQuery(req) {
+    var includeInternationals = ((req.query.includeInternationals + '').toLowerCase() === 'true');
+    var includeMajors = ((req.query.includeMajors + '').toLowerCase() === 'true');
+    var includeDpc = ((req.query.includeDpc + '').toLowerCase() === 'true');
+
+    var query = "SELECT match_id, start_time, dire_score, radiant_score, dire_team_name, radiant_team_name, league_name FROM dbo.Matches";
+
+    if (includeInternationals && includeMajors && includeDpc) {
+        // All matches
+        return query;
+    }
+
+    var whereAdded = false;
+
+    if (!includeInternationals) {
+        if (!whereAdded) {
+            query += " WHERE league_name NOT LIKE '%international%'";
+            whereAdded = true;
+        } else {
+            query += " AND league_name NOT LIKE '%international%'";
+        }
+    }
+
+    if (!includeMajors) {
+        if (!whereAdded) {
+            query += " WHERE (league_name NOT LIKE '%major%' AND league_name NOT LIKE '%asia championship%')";
+            whereAdded = true;
+        } else {
+            query += " AND (league_name NOT LIKE '%major%' AND league_name NOT LIKE '%asia championship%')";
+        }
+    }
+
+    if (!includeDpc) {
+        if (!whereAdded) {
+            query += " WHERE league_name NOT LIKE '%dpc%'";
+            whereAdded = true;
+        } else {
+            query += " AND league_name NOT LIKE '%dpc%'";
+        }
+    }
+
+    return query;
+}
 
 module.exports = router;
