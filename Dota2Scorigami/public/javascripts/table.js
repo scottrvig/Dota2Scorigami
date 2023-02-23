@@ -109,6 +109,7 @@ function showScoreDetail(row, col) {
             if (result.length == 0) {
                 return;
             }
+            $("#detail-modal").modal("show");
         },
         error: function (result) {
             console.log("Error when trying to load Scorigami for cell " + row + ", " + col);

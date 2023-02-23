@@ -48,6 +48,23 @@ block content
                 div(class='hover', id='hover_' + row + "_" + (col - 1))
             -row++
 
+  div(class='modal fade', id='detail-modal', tabindex='-1', aria-hidden='true')
+    div(class='modal-dialog' style='margin-top: 400px')
+      div(class='modal-content' style='background-color:#8300A8')
+        div(class='modal-header')
+          h4(class='modal-title', id='modal-header-text') TEST
+          button(type='button', class='btn-close', data-bs-dismiss='modal', aria-label='Close')
+        div(class='modal-body')
+          table(id='detail-table' class='table table-striped')
+            theader
+              tr
+                th 1
+                th 2
+            tbody
+              tr
+                th foo
+                th bar
+
   script.
       var maxScore = '!{maxScore}';
 
