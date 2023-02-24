@@ -32,10 +32,16 @@ router.get('/getScorigamiMatrix', async (req, res) => {
 });
 
 router.get('/getMatchesWithScore/:radiantScore/:direScore', async (req, res) => {
-    var query = "SELECT match_id, start_time, dire_score, radiant_score, dire_team_name, radiant_team_name, league_name";
-    query += " FROM dbo.Matches";
-    query += " WHERE radiant_score = " + req.params.radiantScore;
-    query += " AND dire_score = " + req.params.direScore;
+    var query = buildMatchQuery(req);
+    if (query.includes("WHERE")) {
+        query += " AND radiant_score = " + req.params.radiantScore;
+        query += " AND dire_score = " + req.params.direScore;
+        query += " ORDER BY match_id DESC";
+    } else {
+        query += " WHERE radiant_score = " + req.params.radiantScore;
+        query += " AND dire_score = " + req.params.direScore;
+        query += " ORDER BY match_id DESC";
+    }
 
     try {
         const pool = await poolPromise;

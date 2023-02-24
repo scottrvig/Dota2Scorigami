@@ -105,13 +105,45 @@ function showScoreDetail(row, col) {
         type: "get",
         data: getParams(),
         contentType: "application/json",
+        beforeSend: function () {
+            $("#loading-spinner").show();
+        },
         success: function (result) {
             if (result.length == 0) {
                 return;
             }
+
+            // Remove all rows but not header row
+            $("#detail-table").find("tr:not(:first)").remove();
+
+            // Update title for modal
+            $("#modal-header-text").text("Radiant: " + row + ", Dire: " + col + " - [" + result.length + "]");
+
+            for (var i = 0; i < result.length; i++) {
+                // Match ID: Link to Dotabuff
+                var matchIdLink = "<a href='https://www.dotabuff.com/matches/" + result[i].match_id + "' target='_blank'>" + result[i].match_id + "</a>";
+
+                // Date in yyyy-MM-dd format
+                var date = new Date(result[i].start_time * 1000);
+                var dateString = date.getFullYear() + "-" + ("0" + (date.getMonth() + 1)).slice(-2) + "-" + ("0" + date.getDate()).slice(-2);
+
+                // Add row for the game
+                $("#detail-table > tbody").append(
+                    "<tr><td>" + matchIdLink +
+                    "</td><td>" + dateString +
+                    "</td><td>" + result[i].league_name +
+                    "</td><td style='color:green'>" + result[i].radiant_team_name +
+                    "</td><td style='color:green'>" + result[i].radiant_score +
+                    "</td><td style='color:red'>" + result[i].dire_team_name +
+                    "</td><td style='color:red'>" + result[i].dire_score +
+                    "</td></tr>");
+            }
+
             $("#detail-modal").modal("show");
+            $("#loading-spinner").hide();
         },
         error: function (result) {
+            $("#loading-spinner").hide();
             console.log("Error when trying to load Scorigami for cell " + row + ", " + col);
         }
     })
